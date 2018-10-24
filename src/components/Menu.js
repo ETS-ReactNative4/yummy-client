@@ -16,8 +16,6 @@ class Menu extends Component {
         $navbarBurgers.forEach(el => {
           el.addEventListener("click", () => {
             // Get the target from the "data-target" attribute
-            const target = el.dataset.target;
-            const $target = document.getElementById(target);
             let menu = document.getElementById("navbar");
 
             // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
@@ -29,13 +27,13 @@ class Menu extends Component {
     });
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a href="" className="navbar-item">
+        <div className="navbar-brand">
+          <a href="/" className="navbar-item">
             Yummy
           </a>
           <a
             role="button"
-            class="navbar-burger burger"
+            className="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
@@ -50,19 +48,19 @@ class Menu extends Component {
           <div className="navbar-start" />
 
           <div className="navbar-end">
-            <a href="" className="navbar-item">
+            <a href="/" className="navbar-item">
               Home
             </a>
 
-            <a href="" className="navbar-item">
+            <a href="/profile" className="navbar-item">
               Profile
             </a>
-            <a href="" className="navbar-item">
+            <a href="/create" className="navbar-item">
               Create Recipe
             </a>
             <div className="navbar-item">
               <div className="buttons">
-                <a href="" className="button is-primary">
+                <a href="/login" className="button is-info">
                   <strong>Log In</strong>
                 </a>
               </div>
