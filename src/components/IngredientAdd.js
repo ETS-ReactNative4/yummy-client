@@ -3,6 +3,8 @@ import "./IngredientAdd.css";
 
 class IngredientAdd extends Component {
   render() {
+    let btn = document.getElementById("remove-btn");
+    btn.addEventListener("click", () => {});
     return (
       <div className="columns is-mobile">
         <div className="column is-two-fifths-mobile">
@@ -24,7 +26,7 @@ class IngredientAdd extends Component {
           />
         </div>
         <div className="column is-two-fith-mobile">
-          <button className="button is-danger is-outlined">
+          <button id="remove-btn" className="button is-danger is-outlined">
             Remove<i className="far fa-trash-alt" />
           </button>
         </div>
