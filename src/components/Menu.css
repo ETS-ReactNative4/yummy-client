@@ -1,0 +1,18 @@
+.navbar {
+  background: #fa983a;
+}
+.navbar-menu:not(.is-active) a {
+  color: white;
+}
+
+.navbar-brand a {
+  font-weight: bold;
+  color: white;
+}
+
+
+a.navbar-item:hover {
+  background: rgba(0, 0, 0, .05);
+}
+
+

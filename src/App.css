@@ -24,3 +24,34 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  background: #fa983a;
+  color: white;
+  border: none;
+  padding: 1em;
+  cursor: pointer;
+}
+
+input, textarea {
+  display: block;
+  background: #efefef;
+  border: 0;
+  padding: .8em;
+  width: 90%;
+}
+
+textarea {
+  margin-bottom: 1em;
+}
+
+
+.center {
+  display: block;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+  margin: 0 auto;
+}
