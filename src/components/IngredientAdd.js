@@ -3,8 +3,6 @@ import "./IngredientAdd.css";
 
 class IngredientAdd extends Component {
   render() {
-    let btn = document.getElementById("remove-btn");
-    btn.addEventListener("click", () => {});
     return (
       <div className="columns is-mobile">
         <div className="column is-two-fifths-mobile">
@@ -13,7 +11,7 @@ class IngredientAdd extends Component {
             type="text"
             name="ingredient"
             placeholder="Add ingredient"
-            defaultValue={this.props.value}
+            defaultValue={this.props.name}
           />
         </div>
         <div className="column is-one-fifth-mobile">

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import IngredientAdd from "./IngredientAdd.js";
+import IngredientList from "./IngredientList.js";
 import "./Create.css";
 
 class Create extends Component {
@@ -7,9 +8,19 @@ class Create extends Component {
     return (
       <div>
         <h2>Create New Recipe</h2>
-        <div className="tags has-addons">
-          <span className="tag">Published</span>
-          <span className="tag is-danger">No</span>
+        <div className="field is-grouped is-groupe-multiline">
+          <div className="control">
+            <div className="tags has-addons">
+              <span className="tag">Saved</span>
+              <span className="tag is-success">Yes</span>
+            </div>
+          </div>
+          <div className="control">
+            <div className="tags has-addons">
+              <span className="tag">Published</span>
+              <span className="tag is-danger">No</span>
+            </div>
+          </div>
         </div>
         <h3>Introduction</h3>
         <hr />
@@ -21,6 +32,12 @@ class Create extends Component {
               name="recipe-title"
               placeholder="Title"
             />
+            <input
+              className="input"
+              type="number"
+              name="servings"
+              placeholder="Servings"
+            />
           </div>
           <div className="column is-two-fifths-mobile">
             <button className="button is-info">Add Photo</button>
@@ -30,9 +47,8 @@ class Create extends Component {
         <h3>Ingredients</h3>
         <hr />
         <div className="columns">
-          <div id="ingredients-list" className="column">
-            <IngredientAdd />
-            <button className="button is-info">Add Ingredient</button>
+          <div className="column">
+            <IngredientList />
           </div>
         </div>
         <h3>Method</h3>
@@ -43,7 +59,10 @@ class Create extends Component {
         />
         <button className="button is-info">Add Step</button>
         <hr />
-        <button className="button is-success">Save Recipe</button>
+        <div className="buttons">
+          <button className="button is-success is-right">Save Recipe</button>
+          <button className="button is-danger">Publish Recipe</button>
+        </div>
       </div>
     );
   }

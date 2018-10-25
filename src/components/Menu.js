@@ -58,6 +58,9 @@ class Menu extends Component {
             <a href="/create" className="navbar-item">
               Create Recipe
             </a>
+            <a href="/recipe" className="navbar-item">
+              Discover Recipe
+            </a>
             <div className="navbar-item">
               <div className="buttons">
                 <a href="/login" className="button is-info">
@@ -66,7 +69,6 @@ class Menu extends Component {
               </div>
             </div>
           </div>
-
         </div>
       </nav>
     );

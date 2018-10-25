@@ -3,38 +3,23 @@ import "./Recipe.css";
 
 class Recipe extends Component {
   render() {
+    let ingredients =
+      "2 Onions, 2 Cloves Garlic, 1 Inch Ginger,2 Chicken Breasts,200ml Stock";
+    ingredients = ingredients.split(",");
+
     return (
       <div className="App-body field">
-        <h2>Recipe</h2>
+        <h2>Chicken Pie</h2>
         <p>Author</p>
-        <figure className="image is-128x128">
-          <img src="https://bulma.io/images/placeholders/128x128.png" />
+        <figure className="image is-256x256">
+          <img src="https://gbc-cdn-public-media.azureedge.net/img26158.768x512.jpg" />
         </figure>
 
         <h3>Ingredients</h3>
+        <ul>
+          {ingredients.map(ingredient => <li>{ingredient}</li>)}
+        </ul>
         <hr />
-        <table className="table is-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Onions</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Garlic</td>
-              <td>2 Cloves</td>
-            </tr>
-            <tr>
-              <td>Chicken Breasts</td>
-              <td>2</td>
-            </tr>
-          </tbody>
-        </table>
         <h3>Method</h3>
         <hr />
         <h4>Step 1</h4>
