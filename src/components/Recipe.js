@@ -14,8 +14,14 @@ class Recipe extends Component {
     };
 
     Request.getAllRecipes(data => {
+      this.setState(data[1]);
+    });
+
+    /*
+    Request.getRecipe(data => {
       this.setState(data[0]);
     });
+    */
   }
 
   render() {
@@ -56,15 +62,14 @@ class Recipe extends Component {
                 </tr>
               </tbody>
             </table>
+            <h3>Ingredients</h3>
+            <ul>
+              {this.state.ingredients.map(ingredient => (
+                <li><b>{ingredient.qty}</b> {ingredient.name}</li>
+              ))}
+            </ul>
           </div>
         </div>
-
-        <h3>Ingredients</h3>
-        <ul>
-          {this.state.ingredients.map(ingredient => (
-            <li><b>{ingredient.qty}</b> {ingredient.name}</li>
-          ))}
-        </ul>
         <hr />
         <h3>Method</h3>
         <ol>

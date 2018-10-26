@@ -26,7 +26,8 @@ class Home extends Component {
               <div className="media">
                 <div className="media-content">
                   <p className="title is-4">
-                    <a href="/recipe">{recipe.title}</a>
+
+                    <a href={"/recipe?id=" + recipe._id}>{recipe.title}</a>
                   </p>
                   <p className="subtitle is-6">
                     {recipe.author ? recipe.author : "Anonymous"}
