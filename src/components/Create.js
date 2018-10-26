@@ -11,7 +11,7 @@ class Create extends Component {
     return (
       <div>
         <h2>Create New Recipe</h2>
-        <div className="field is-grouped is-groupe-multiline">
+        <div className="field is-grouped is-grouped-multiline">
           <div className="control">
             <div className="tags has-addons">
               <span className="tag">Saved</span>

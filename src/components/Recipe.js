@@ -13,15 +13,16 @@ class Recipe extends Component {
       author: ""
     };
 
+    /*
     Request.getAllRecipes(data => {
       this.setState(data[1]);
     });
+    */
+    let id = this.props.id;
 
-    /*
-    Request.getRecipe(data => {
+    Request.getRecipe(id, data => {
       this.setState(data[0]);
     });
-    */
   }
 
   render() {
@@ -35,7 +36,16 @@ class Recipe extends Component {
           </div>
           <div className="column">
             <h2>{this.state.title}</h2>
-            <p>by {this.state.author ? this.state.author : "Anonymous"}</p>
+            <div className="tags has-addons">
+              <span className="tag">Added to favourites</span>
+              <span className="tag is-danger">No</span>
+            </div>
+            <p>
+              by
+              {" "}
+              {this.state.author ? this.state.author : "Anonymous"}
+              {" "}
+            </p>
             <table className="table is-bordered">
               <thead>
                 <tr>

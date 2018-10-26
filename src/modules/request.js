@@ -14,7 +14,8 @@ export function getAllRecipes(callback) {
 }
 
 export function getRecipe(id, callback) {
-  fetch(url + "/recipe?id=" + id)
+  console.log(id);
+  fetch(url + "/recipe/" + id)
     .then(response => {
       return response.json();
     })

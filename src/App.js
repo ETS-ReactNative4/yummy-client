@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bulma/css/bulma.min.css";
 import "./App.css";
+import * as Routes from "./Routes.js";
 import Create from "./components/Create.js";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
@@ -24,7 +25,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/profile" component={Profile} />
-              <Route path="/recipe" component={Recipe} />
+              <Route path="/recipe/:id" component={Routes.RecipeRoute} />
             </Switch>
           </BrowserRouter>
         </div>

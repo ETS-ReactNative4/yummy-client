@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as Request from "../modules/request";
+import RecipeCard from "./RecipeCard.js";
 import "./Home.css";
 
 class Home extends Component {
@@ -18,28 +19,13 @@ class Home extends Component {
     return (
       <div className="App-body">
         {this.state.recipes.map(recipe => (
-          <div className="card">
-            <div className="card-image">
-              <img src={recipe.photo} alt="Placeholder image" />
-            </div>
-            <div className="card-content">
-              <div className="media">
-                <div className="media-content">
-                  <p className="title is-4">
-
-                    <a href={"/recipe?id=" + recipe._id}>{recipe.title}</a>
-                  </p>
-                  <p className="subtitle is-6">
-                    {recipe.author ? recipe.author : "Anonymous"}
-                  </p>
-                </div>
-              </div>
-
-              <div className="content">
-                {recipe.description}
-              </div>
-            </div>
-          </div>
+          <RecipeCard
+            photo={recipe.photo}
+            id={recipe._id}
+            author={recipe.author}
+            description={recipe.description}
+            title={recipe.title}
+          />
         ))}
       </div>
     );

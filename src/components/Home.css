@@ -1,4 +1,9 @@
+@media only screen and (min-width: 768px) {
+  /* For mobile phones: */
+  .card {
+    max-width: 25%;
+  }
+}
 .card {
-  max-width: 100%;
   margin-bottom: 1em;
 }
