@@ -1,38 +1,75 @@
 import React, { Component } from "react";
+import * as Request from "../modules/request";
 import "./Recipe.css";
 
 class Recipe extends Component {
-  render() {
-    let ingredients =
-      "2 Onions, 2 Cloves Garlic, 1 Inch Ginger,2 Chicken Breasts,200ml Stock";
-    ingredients = ingredients.split(",");
+  constructor(props) {
+    super(props);
+    this.state = {
+      ingredients: [],
+      method: [],
+      title: "",
+      photo: "",
+      author: ""
+    };
 
+    Request.getAllRecipes(data => {
+      this.setState(data[0]);
+    });
+  }
+
+  render() {
     return (
       <div className="App-body field">
-        <h2>Chicken Pie</h2>
-        <p>Author</p>
-        <figure className="image is-256x256">
-          <img src="https://gbc-cdn-public-media.azureedge.net/img26158.768x512.jpg" />
-        </figure>
+        <div className="columns">
+          <div className="column">
+            <figure className="image is-256x256">
+              <img className="img-banner" src={this.state.photo} />
+            </figure>
+          </div>
+          <div className="column">
+            <h2>{this.state.title}</h2>
+            <p>by {this.state.author ? this.state.author : "Anonymous"}</p>
+            <table className="table is-bordered">
+              <thead>
+                <tr>
+                  <th>Serves</th>
+                  <th>Prep time</th>
+                  <th>Cooking time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    {this.state.serving}
+                  </td>
+                  <td>
+                    {this.state["prep-time"]}
+                    {" "}
+                    {this.state["prep-time-unit"]}
+                  </td>
+                  <td>
+                    {this.state["cook-time"]}
+                    {" "}
+                    {this.state["cook-time-unit"]}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
         <h3>Ingredients</h3>
         <ul>
-          {ingredients.map(ingredient => <li>{ingredient}</li>)}
+          {this.state.ingredients.map(ingredient => (
+            <li><b>{ingredient.qty}</b> {ingredient.name}</li>
+          ))}
         </ul>
         <hr />
         <h3>Method</h3>
-        <hr />
-        <h4>Step 1</h4>
-        <p>
-          Finely chop the onions and put into a hot frying pan with a drizzle of olive oil.
-        </p>
-
-        <h4>Step 2</h4>
-        <p>
-          Finely chop the onions and put into a hot frying pan with a drizzle of olive oil.
-          Chop the onions and put into a hot frying pan with a drizzle of olive oil.
-        </p>
-
+        <ol>
+          {this.state.method.map(step => <li>{step}</li>)}
+        </ol>
       </div>
     );
   }

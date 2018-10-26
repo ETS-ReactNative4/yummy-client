@@ -4,6 +4,9 @@ import IngredientList from "./IngredientList.js";
 import "./Create.css";
 
 class Create extends Component {
+  state: {
+    err: null
+  };
   render() {
     return (
       <div>
@@ -31,6 +34,7 @@ class Create extends Component {
               type="text"
               name="recipe-title"
               placeholder="Title"
+              id="input-title"
             />
             <input
               className="input"
@@ -60,11 +64,27 @@ class Create extends Component {
         <button className="button is-info">Add Step</button>
         <hr />
         <div className="buttons">
-          <button className="button is-success is-right">Save Recipe</button>
+          <button id="btn-save-recipe" className="button is-success is-right">
+            Save Recipe
+          </button>
           <button className="button is-danger">Publish Recipe</button>
         </div>
       </div>
     );
+
+    let btn = document.getElementById("btn-save-recipe");
+    btn.addEventListener("click", () => {
+      validateForm();
+    });
+  }
+}
+
+function validateForm() {
+  let title = document.getElementById("input-title").value;
+  let err = "";
+  if (!title) {
+    Create.setState("err", "Please provide a valid title");
+    return;
   }
 }
 
