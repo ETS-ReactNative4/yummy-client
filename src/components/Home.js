@@ -18,15 +18,19 @@ class Home extends Component {
   render() {
     return (
       <div className="App-body">
-        {this.state.recipes.map(recipe => (
-          <RecipeCard
-            photo={recipe.photo}
-            id={recipe._id}
-            author={recipe.author}
-            description={recipe.description}
-            title={recipe.title}
-          />
-        ))}
+        <div className="columns">
+          {this.state.recipes.map(recipe => (
+            <div className="column is-3">
+              <RecipeCard
+                photo={recipe.photo}
+                id={recipe._id}
+                author={recipe.author}
+                description={recipe.description}
+                title={recipe.title}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

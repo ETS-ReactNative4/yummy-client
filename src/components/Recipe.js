@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as Request from "../modules/request";
+import Comment from "./Comment.js";
+import CommentInput from "./CommentInput.js";
 import "./Recipe.css";
 
 class Recipe extends Component {
@@ -85,6 +87,13 @@ class Recipe extends Component {
         <ol>
           {this.state.method.map(step => <li>{step}</li>)}
         </ol>
+        <hr />
+        <h3>Comments</h3>
+        {this.state.comments != null &&
+          this.state.comments.map(comment => (
+            <Comment author={comment.author} body={comment.body} />
+          ))}
+        <CommentInput />
       </div>
     );
   }
