@@ -1,3 +1,9 @@
-.input {
+field .input {
+  margin: 0 auto;
+  margin-bottom: 1em;
+  display: block;
+}
+
+input {
   margin-bottom: 1em;
 }

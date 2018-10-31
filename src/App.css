@@ -1,3 +1,10 @@
+@media only screen and (min-width: 768px) {
+  .narrow  {
+    width: 80ch;
+    margin: 0 auto;
+  }
+}
+
 .App {
   //text-align: center;
 }
@@ -54,4 +61,16 @@ textarea {
 .text-center {
   text-align: center;
   margin: 0 auto;
+}
+
+.is-centered {
+  text-align: center;
+}
+
+.content p {
+  //text-align: justify;
+}
+
+.muted {
+  color: grey;
 }

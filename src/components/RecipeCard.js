@@ -7,7 +7,7 @@ class RecipeCard extends Component {
       <a href={"/recipe/" + this.props.id}>
         <div className="card">
           <div className="card-image">
-            <img src={this.props.photo} alt="Placeholder image" />
+            <img src={this.props.photo} alt={this.props.title} />
           </div>
           <div className="card-content">
             <div className="media">
@@ -22,7 +22,13 @@ class RecipeCard extends Component {
             </div>
 
             <div className="content">
-              {this.props.description}
+              {this.props.description.slice(0, 120)}
+              {this.props.description.length > 120 ? "..." : ""}
+              <br />
+              <br />
+              <p className="muted">
+                Read more
+              </p>
             </div>
           </div>
         </div>

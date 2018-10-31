@@ -15,11 +15,6 @@ class Recipe extends Component {
       author: ""
     };
 
-    /*
-    Request.getAllRecipes(data => {
-      this.setState(data[1]);
-    });
-    */
     let id = this.props.id;
 
     Request.getRecipe(id, data => {
@@ -31,23 +26,23 @@ class Recipe extends Component {
     return (
       <div className="App-body field">
         <div className="columns">
-          <div className="column">
-            <figure className="image is-256x256">
-              <img className="img-banner" src={this.state.photo} />
-            </figure>
-          </div>
-          <div className="column">
-            <h2>{this.state.title}</h2>
-            <div className="tags has-addons">
-              <span className="tag">Added to favourites</span>
-              <span className="tag is-danger">No</span>
-            </div>
-            <p>
+          <div className="column is-full">
+            <h1 className="is-centered">{this.state.title}</h1>
+            <p className="is-centered">
               by
               {" "}
               {this.state.author ? this.state.author : "Anonymous"}
               {" "}
             </p>
+            <hr />
+            <p>{this.state.description}</p>
+            <figure className="image is-256x256">
+              <img className="img-banner" src={this.state.photo} />
+            </figure>
+          </div>
+        </div>
+        <div className="columns">
+          <div className="column is-full">
             <table className="table is-bordered">
               <thead>
                 <tr>
@@ -74,26 +69,38 @@ class Recipe extends Component {
                 </tr>
               </tbody>
             </table>
-            <h3>Ingredients</h3>
+            <h2>Ingredients</h2>
             <ul>
               {this.state.ingredients.map(ingredient => (
-                <li><b>{ingredient.qty}</b> {ingredient.name}</li>
+                <li key={ingredient.name.toString()}>
+                  <b>{ingredient.qty}</b> {ingredient.name}
+                </li>
               ))}
             </ul>
           </div>
         </div>
-        <hr />
-        <h3>Method</h3>
-        <ol>
-          {this.state.method.map(step => <li>{step}</li>)}
-        </ol>
-        <hr />
-        <h3>Comments</h3>
-        {this.state.comments != null &&
-          this.state.comments.map(comment => (
-            <Comment author={comment.author} body={comment.body} />
+        <div className="">
+          <hr />
+          <h2>Method</h2>
+          {this.state.method.map((step, index) => (
+            <div>
+              <h3>Step {index + 1}</h3>
+              <p>{step}</p>
+              <br />
+            </div>
           ))}
-        <CommentInput />
+          <hr />
+          <h2>Comments</h2>
+          {this.state.comments != null &&
+            this.state.comments.map(comment => (
+              <Comment
+                key={comment.body}
+                author={comment.author}
+                body={comment.body}
+              />
+            ))}
+          <CommentInput id={this.props.id} />
+        </div>
       </div>
     );
   }

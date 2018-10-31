@@ -18,9 +18,11 @@ class Home extends Component {
   render() {
     return (
       <div className="App-body">
-        <div className="columns">
-          {this.state.recipes.map(recipe => (
-            <div className="column is-3">
+        <h1>All Recipes</h1>
+        <hr />
+        <div className="columns is-multiline">
+          {this.state.recipes.map((recipe, index) => (
+            <div className="column is-6" key={recipe._id.toString()}>
               <RecipeCard
                 photo={recipe.photo}
                 id={recipe._id}

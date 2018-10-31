@@ -10,14 +10,13 @@ import Footer from "./components/Footer.js";
 import Menu from "./components/Menu.js";
 import Register from "./components/Register.js";
 import Profile from "./components/Profile.js";
-import Recipe from "./components/Recipe.js";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Menu />
-        <div className="App-body content">
+        <div className="App-body content narrow">
           <BrowserRouter>
             <Switch>
               <Route path="/" component={Home} exact />

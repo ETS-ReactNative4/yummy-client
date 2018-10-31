@@ -31,7 +31,7 @@ class Menu extends Component {
           <a href="/" className="navbar-item">
             Yummy
           </a>
-          <a
+          <button
             role="button"
             className="navbar-burger burger"
             aria-label="menu"
@@ -41,7 +41,7 @@ class Menu extends Component {
             <span aria-hidden="true" />
             <span aria-hidden="true" />
             <span aria-hidden="true" />
-          </a>
+          </button>
         </div>
         <div id="navbar" className="navbar-menu">
 
@@ -57,9 +57,6 @@ class Menu extends Component {
             </a>
             <a href="/create" className="navbar-item">
               Create Recipe
-            </a>
-            <a href="/recipe" className="navbar-item">
-              Discover Recipe
             </a>
             <div className="navbar-item">
               <div className="buttons">

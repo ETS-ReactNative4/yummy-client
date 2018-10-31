@@ -15,4 +15,13 @@ a.navbar-item:hover {
   background: rgba(0, 0, 0, .05);
 }
 
+.burger {
+  color: white;
+}
+
+.navbar button:focus {
+  outline: none;
+}
+
+
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import IngredientAdd from "./IngredientAdd.js";
+//import IngredientAdd from "./IngredientAdd.js";
 import IngredientList from "./IngredientList.js";
 import "./Create.css";
 
