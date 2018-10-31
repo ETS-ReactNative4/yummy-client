@@ -54,7 +54,7 @@ export function comment(comment, callback) {
 }
 
 export function register(user, callback) {
-  let urlExtension = `/register/${user.email}/${user.username}/${user.passwor}`;
+  let urlExtension = `/register/${user.email}/${user.username}/${user.password}`;
 
   fetch(url + urlExtension, getPostOptions(user)).then(response => {
     response.json().then(data => {

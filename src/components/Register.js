@@ -1,34 +1,37 @@
 import React, { Component } from "react";
 import * as Request from "../modules/request";
+import ErrorMessage from "./ErrorMessage.js";
 import "./Register.css";
 
 class Register extends Component {
   constructor(props) {
     super(props);
     this.register = this.register.bind(this);
+    this.state = {
+      error: []
+    };
   }
 
   register() {
-    console.log("Registering");
     let user = {
-      email: document.getElementById("user-email"),
-      username: document.getElementById("user-username"),
-      password: document.getElementById("user-password")
-    };
-    let testUser = {
-      email: "test",
-      username: "test",
-      password: "test"
+      email: document.getElementById("user-email").value,
+      username: document.getElementById("user-username").value,
+      password: document.getElementById("user-password").value
     };
 
-    Request.register(testUser, res => {
-      console.log(res);
-      alert(res.error);
+    Request.register(user, res => {
+      if (res.redirect) {
+        window.location.href = res.redirect;
+      } else if (res.error) {
+        this.setState({ error: [{ message: res.error }] });
+      }
     });
   }
+
   render() {
     return (
       <div className="App-body field">
+        {this.state.error.map(error => <ErrorMessage error={error.message} />)}
         <input
           className="input"
           type="email"

@@ -10,6 +10,7 @@ import Footer from "./components/Footer.js";
 import Menu from "./components/Menu.js";
 import Register from "./components/Register.js";
 import Profile from "./components/Profile.js";
+import About from "./components/About";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
               <Route path="/create" component={Create} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <Route path="/about/" component={About} />
               <Route path="/profile" component={Profile} />
               <Route path="/recipe/:id" component={Routes.RecipeRoute} />
             </Switch>
