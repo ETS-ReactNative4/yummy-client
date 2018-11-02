@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as Request from "../modules/request";
 import Comment from "./Comment.js";
 import CommentInput from "./CommentInput.js";
+import ErrorMessage from "./ErrorMessage.js";
 import "./Recipe.css";
 
 class Recipe extends Component {
@@ -12,13 +13,18 @@ class Recipe extends Component {
       method: [],
       title: "",
       photo: "",
-      author: ""
+      author: "",
+      error: []
     };
 
     let id = this.props.id;
 
     Request.getRecipe(id, data => {
-      this.setState(data[0]);
+      if (data.error) {
+        this.setState({ error: [{ message: data.error }] });
+      } else {
+        this.setState(data[0]);
+      }
     });
   }
 
@@ -27,6 +33,9 @@ class Recipe extends Component {
       <div className="App-body field">
         <div className="columns">
           <div className="column is-full">
+            {this.state.error.map(error => (
+              <ErrorMessage error={error.message} />
+            ))}
             <h1 className="is-centered">{this.state.title}</h1>
             <p className="is-centered">
               by

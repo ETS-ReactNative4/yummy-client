@@ -10,11 +10,13 @@ class Home extends Component {
       recipes: []
     };
 
-    Request.getAllRecipes(data => {
+    let options = ["title", "author", "description", "photo"];
+    Request.getAllRecipes(options, data => {
       this.setState({ recipes: data });
       console.log(this.state.recipes);
     });
   }
+
   render() {
     return (
       <div className="App-body">

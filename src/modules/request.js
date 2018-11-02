@@ -1,7 +1,14 @@
-const url = "http://localhost:8000/api";
+const url = "http://localhost:8000/api/v1/";
 
-export function getAllRecipes(callback) {
-  fetch(url + "/all")
+export function getAllRecipes(options, callback) {
+  let urlExtension = "?fields=";
+  if (options) {
+    options.forEach(option => {
+      urlExtension += "," + option;
+    });
+  }
+
+  fetch(url + "all" + urlExtension)
     .then(response => {
       return response.json();
     })
@@ -15,7 +22,7 @@ export function getAllRecipes(callback) {
 
 export function getRecipe(id, callback) {
   console.log(id);
-  fetch(url + "/recipe/" + id)
+  fetch(url + "recipe/?id=" + id)
     .then(response => {
       return response.json();
     })
@@ -28,7 +35,7 @@ export function getRecipe(id, callback) {
 }
 
 export function getComments(id, callback) {
-  fetch(url + "/comment/" + id)
+  fetch(url + "comment/" + id)
     .then(response => {
       return response.json();
     })
@@ -41,7 +48,7 @@ export function getComments(id, callback) {
 }
 
 export function comment(comment, callback) {
-  let urlExtension = `/comment/${comment.id}/${comment.uid}/${comment.content}`;
+  let urlExtension = `comment/${comment.id}/${comment.uid}/${comment.content}`;
   let data = {
     id: comment.id,
     uid: comment.uid,
@@ -54,7 +61,7 @@ export function comment(comment, callback) {
 }
 
 export function register(user, callback) {
-  let urlExtension = `/register/${user.email}/${user.username}/${user.password}`;
+  let urlExtension = `register/${user.email}/${user.username}/${user.password}`;
 
   fetch(url + urlExtension, getPostOptions(user)).then(response => {
     response.json().then(data => {
