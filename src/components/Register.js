@@ -19,6 +19,13 @@ class Register extends Component {
       password: document.getElementById("user-password").value
     };
 
+    Request.register(user).then(response => {
+      console.log("Registered", response);
+    }).catch(err => {
+      alert("Error: ", err.message);
+    });
+
+    /*
     Request.register(user, res => {
       if (res.redirect) {
         window.location.href = res.redirect;
@@ -26,6 +33,7 @@ class Register extends Component {
         this.setState({ error: [{ message: res.error }] });
       }
     });
+    */
   }
 
   render() {

@@ -17,14 +17,10 @@ class Recipe extends Component {
       error: []
     };
 
-    let id = this.props.id;
-
-    Request.getRecipe(id, data => {
-      if (data.error) {
-        this.setState({ error: [{ message: data.error }] });
-      } else {
-        this.setState(data[0]);
-      }
+    Request.getRecipe(this.props.id).then(response => {
+      this.setState(response[0]);
+    }, err => {
+      this.setState({error: [{message: err.message}] });
     });
   }
 
@@ -46,7 +42,11 @@ class Recipe extends Component {
             <hr />
             <p>{this.state.description}</p>
             <figure className="image is-256x256">
-              <img className="img-banner" src={this.state.photo} />
+              <img
+                alt={this.state.title}
+                className="img-banner"
+                src={this.state.photo}
+              />
             </figure>
           </div>
         </div>

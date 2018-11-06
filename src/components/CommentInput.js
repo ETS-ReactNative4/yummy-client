@@ -9,17 +9,16 @@ class CommentInput extends Component {
   }
 
   postComment() {
-    console.log("clicked");
     let content = document.getElementById("content").value;
-    console.log(content);
     let uid = 0;
     let id = this.props.id;
-    Request.comment({ id: id, uid: uid, content: content }, res => {
-      Request.getComments(id, result => {
-        this.setState({ comments: result });
-        console.log(this.state);
+
+    Request.comment({id: id, uid: uid, content: content})
+      .then(response => {
+        console.log(response);
+      }).catch(err => {
+        alert("Error: ", err.message);
       });
-    });
   }
 
   render() {

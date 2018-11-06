@@ -1,6 +1,12 @@
 const url = "http://localhost:8000/api/v1/";
+const axios = require("axios");
 
-export function getAllRecipes(options, callback) {
+/*
+ * Requests all recipes data
+ * @param {object} options - specifics to search for (title, author... etc.)
+ * @param {function} callback
+ */
+export function getAllRecipes(options) {
   let urlExtension = "?fields=";
   if (options) {
     options.forEach(option => {
@@ -8,46 +14,48 @@ export function getAllRecipes(options, callback) {
     });
   }
 
-  fetch(url + "all" + urlExtension)
-    .then(response => {
-      return response.json();
-    })
-    .then(myJson => {
-      callback(myJson);
-    })
-    .catch(err => {
-      console.error(err);
+  return new Promise((resolve, reject) => {
+    axios.get(url + "all" + urlExtension).then(response => {
+      resolve(response.data);
+    }).catch(err => {
+      reject(err);
     });
+  });
 }
 
-export function getRecipe(id, callback) {
-  console.log(id);
-  fetch(url + "recipe/?id=" + id)
-    .then(response => {
-      return response.json();
-    })
-    .then(myJson => {
-      callback(myJson);
-    })
-    .catch(err => {
-      console.error(err);
+/*
+ * Request data for a specific recipe
+ * @param {string} id - id of the recipe
+ */
+export function getRecipe(id) {
+  return new Promise((resolve, reject) => {
+    axios.get(url + "recipe?id=" + id).then(response => {
+      resolve(response.data);
+    }).catch(err => {
+      reject(err);
     });
+  });
 }
 
-export function getComments(id, callback) {
-  fetch(url + "comment/" + id)
-    .then(response => {
-      return response.json();
-    })
-    .then(myJson => {
-      callback(myJson);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+/*
+ * Request for all comments related to a recipe
+ * @param {string} id - id of the recipe commenting on
+ */
+export function getComments(id) {
+  return new Promise((resolve, reject) => {
+    axios.get(url + "comment").then(response => {
+      resolve(response.data);
+    }).catch(err => {
+      reject(err);
+    }); 
+  });
 }
 
-export function comment(comment, callback) {
+/*
+ * Requests for comment to be added to recipe
+ * @param {object} comment - contains recipe id, user id and content
+ */
+export function comment(comment) {
   let urlExtension = `comment/${comment.id}/${comment.uid}/${comment.content}`;
   let data = {
     id: comment.id,
@@ -55,21 +63,48 @@ export function comment(comment, callback) {
     content: comment.content
   };
 
-  fetch(url + urlExtension, getPostOptions(data)).then(response =>
-    response.json()
-  ); // parses response to JSON
-}
-
-export function register(user, callback) {
-  let urlExtension = `register/${user.email}/${user.username}/${user.password}`;
-
-  fetch(url + urlExtension, getPostOptions(user)).then(response => {
-    response.json().then(data => {
-      callback(data);
+  return new Promise((resolve, reject) => {
+    axios.post(url + urlExtension, data).then(response => {
+      resolve(response);
+    }).catch(err => {
+      reject(err);
     });
   });
 }
 
+/*
+ * Request for user to be added to database
+ * @param {object} user - has username, email and password
+ * @param {function} callback
+ */
+export function register(user) {
+  let urlExtension = `register/${user.email}/${user.username}/${user.password}`;
+
+  return new Promise((resolve, reject) => {
+    axios.post(url + urlExtension, comment).then(response => {
+      resolve(response);
+    }).catch(err => {
+      reject(err);
+    });
+  });
+}
+
+export function addRecipe(recipe, callback) {
+  let urlExtension = `recipe`;
+
+  return new Promise((resolve, reject) => {
+    axios.post(url + urlExtension, recipe).then(response => {
+      resolve(response);
+    }).catch(err => {
+      reject(err);
+    });
+  });
+}
+
+/*
+ * Returns POST header containing body object
+ * @param {object} data
+ */
 function getPostOptions(data) {
   return {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -84,4 +119,18 @@ function getPostOptions(data) {
     referrer: "no-referrer", // no-referrer, *client
     body: JSON.stringify(data) // body data type must match "Content-Type" header
   };
+}
+
+
+/*
+ * Throws error if response is not valid
+ * @param {object} response - response form a fetch request
+ */
+function handleError(response) {
+  console.log("Handling");
+  if (!response.ok) {
+    console.log("Throwing new error");
+    throw new Error(response.statusText);
+  }
+  return response;
 }

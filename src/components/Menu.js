@@ -32,7 +32,6 @@ class Menu extends Component {
             Yummy
           </a>
           <button
-            role="button"
             className="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
