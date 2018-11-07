@@ -4,9 +4,8 @@ const axios = require("axios");
 /*
  * Requests all recipes data
  * @param {object} options - specifics to search for (title, author... etc.)
- * @param {function} callback
  */
-export function getAllRecipes(options) {
+export function getAllRecipes(options, searchTerm=null) {
   let urlExtension = "?fields=";
   if (options) {
     options.forEach(option => {
@@ -14,10 +13,19 @@ export function getAllRecipes(options) {
     });
   }
 
+  if (searchTerm) {
+    urlExtension += (options && searchTerm) ? "&" : "?";
+  }
+
+  if (searchTerm) {
+    urlExtension += "search=" + searchTerm;
+  }
+
   return new Promise((resolve, reject) => {
     axios.get(url + "all" + urlExtension).then(response => {
       resolve(response.data);
     }).catch(err => {
+      console.log(err);
       reject(err);
     });
   });
@@ -89,7 +97,9 @@ export function register(user) {
   });
 }
 
-export function addRecipe(recipe, callback) {
+export function addRecipe(recipe) {
+  console.log("Trying to add recipe");
+  console.log(recipe);
   let urlExtension = `recipe`;
 
   return new Promise((resolve, reject) => {

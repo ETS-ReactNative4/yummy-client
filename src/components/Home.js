@@ -9,9 +9,22 @@ class Home extends Component {
     this.state = {
       recipes: []
     };
+    this.searchRecipes = this.searchRecipes.bind(this);
 
-    let options = ["title", "author", "description", "photo"];
-    Request.getAllRecipes(options).then(response => {
+    this.options = ["title", "author", "description", "photo"];
+    Request.getAllRecipes(this.props.options).then(response => {
+      console.log(response);
+      this.setState({ recipes: response });
+    }, err => {
+      this.setState({error: {message: err.message}});
+    });
+  }
+
+  searchRecipes() {
+    let searchTerm = document.getElementById("search").value;
+    console.log(searchTerm, this.options);
+    Request.getAllRecipes(this.options, searchTerm).then(response => {
+      console.log(response);
       this.setState({ recipes: response });
     }, err => {
       this.setState({error: {message: err.message}});
@@ -29,6 +42,7 @@ class Home extends Component {
             <div className="field has-addons">
               <div className="control">
                 <input
+                  onChange={this.searchRecipes}
                   className="input"
                   type="text"
                   id="search"

@@ -20,20 +20,13 @@ class Register extends Component {
     };
 
     Request.register(user).then(response => {
-      console.log("Registered", response);
+      window.location.href = '/';
+    }, rejected => {
+      console.log(rejected);
+      this.setState({error: [{message: "invalid"}]});
     }).catch(err => {
-      alert("Error: ", err.message);
+      console.log(err);
     });
-
-    /*
-    Request.register(user, res => {
-      if (res.redirect) {
-        window.location.href = res.redirect;
-      } else if (res.error) {
-        this.setState({ error: [{ message: res.error }] });
-      }
-    });
-    */
   }
 
   render() {

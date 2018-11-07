@@ -15,25 +15,22 @@ class Create extends Component {
   
   scrapeForm() {
     console.log("Validating");
-    let title = document.getElementById("input-title");
-    let description = document.getElementById("textarea-description");
-    let serves = document.getElementById("input-serves");
-    let ingredients = document.getElementById("input-ingredients");
+    let title = document.getElementById("input-title").value;
+    let description = document.getElementById("textarea-description").innerHTML;
+    let serves = document.getElementById("input-serves").value;
+    //let ingredients = document.getElementById("textarea-ingredients").innerHTML;
 
     let recipe = {
       title: title,
       author: "Ed Prince",
       description: description,
-      ingredients: ingredients,
       serves: serves
     }
 
-    let id = "5bd231ea2373340fd9540bb5";
-
-    Request.getRecipe(id).then((response) => {
-      console.log(response);
-    }, (err) => {
-      console.error(err.message);
+    Request.addRecipe(recipe).then(response => {
+      alert("Added recipe");
+    }).catch(err => {
+      console.error("Could not add recipe. Error: ", err);
     });
   }
  
@@ -44,7 +41,7 @@ class Create extends Component {
         <h3>Introduction</h3>
         <hr />
         <div className="columns is-mobile">
-          <div className="column is-three-fifths-mobile">
+          <div className="column">
             <input
               className="input"
               type="text"
@@ -55,14 +52,18 @@ class Create extends Component {
             />
             <input
               className="input"
+              type="text"
+              name="recipe-photo"
+              placeholder="Image URL"
+              id="input-photo"
+            />
+            <input
+              className="input"
               type="number"
               name="servings"
               placeholder="Servings"
               id="input-serves"
             />
-          </div>
-          <div className="column is-two-fifths-mobile">
-            <button className="button is-info">Add Photo</button>
           </div>
         </div>
         <textarea 
