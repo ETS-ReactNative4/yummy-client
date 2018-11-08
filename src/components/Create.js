@@ -6,37 +6,37 @@ import "./Create.css";
 
 class Create extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       err: null
     };
     this.scrapeForm = this.scrapeForm.bind(this);
   }
-  
+
   scrapeForm() {
     console.log("Validating");
-    let title = document.getElementById("input-title").value;
-    let description = document.getElementById("textarea-description").innerHTML;
-    let serves = document.getElementById("input-serves").value;
+    const title = document.getElementById("input-title").value;
+    const description = document.getElementById("textarea-description").innerHTML;
+    const serves = document.getElementById("input-serves").value;
     //let ingredients = document.getElementById("textarea-ingredients").innerHTML;
 
-    let recipe = {
+    const recipe = {
       title: title,
       author: "Ed Prince",
       description: description,
       serves: serves
-    }
+    };
 
-    Request.addRecipe(recipe).then(response => {
+    Request.addRecipe(recipe).then(() => {
       alert("Added recipe");
     }).catch(err => {
       console.error("Could not add recipe. Error: ", err);
     });
   }
- 
+
   render() {
     return (
-      <div>
+      <div className="narrow">
         <h2>Create New Recipe</h2>
         <h3>Introduction</h3>
         <hr />
@@ -66,9 +66,9 @@ class Create extends Component {
             />
           </div>
         </div>
-        <textarea 
-          className="textarea" 
-          placeholder="Description" 
+        <textarea
+          className="textarea"
+          placeholder="Description"
           id="textarea-description"
         />
         <h3>Ingredients</h3>

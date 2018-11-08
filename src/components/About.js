@@ -4,7 +4,7 @@ import "./About.css";
 class About extends Component {
   render() {
     return (
-      <div className="App-body">
+      <div className="App-body narrow">
         <h1>About Yummy</h1>
         <p>
           Yummy is a recipe app that allows you to browse

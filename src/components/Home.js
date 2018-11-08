@@ -10,9 +10,9 @@ class Home extends Component {
       recipes: []
     };
     this.searchRecipes = this.searchRecipes.bind(this);
-
     this.options = ["title", "author", "description", "photo"];
-    Request.getAllRecipes(this.props.options).then(response => {
+
+    Request.getAllRecipes(this.options).then(response => {
       console.log(response);
       this.setState({ recipes: response });
     }, err => {
@@ -21,7 +21,7 @@ class Home extends Component {
   }
 
   searchRecipes() {
-    let searchTerm = document.getElementById("search").value;
+    const searchTerm = document.getElementById("search").value;
     console.log(searchTerm, this.options);
     Request.getAllRecipes(this.options, searchTerm).then(response => {
       console.log(response);
@@ -39,27 +39,21 @@ class Home extends Component {
             <h1>All Recipes</h1>
           </div>
           <div className="column is-6">
-            <div className="field has-addons">
-              <div className="control">
-                <input
-                  onChange={this.searchRecipes}
-                  className="input"
-                  type="text"
-                  id="search"
-                  placeholder="Search recipes..."
-                />
-              </div>
-              <div className="control">
-                <button className="button is-info">
-                  Search
-                </button>
-              </div>
+            <div className="control">
+              <input
+                onChange={this.searchRecipes}
+                className="input"
+                type="text"
+                id="search"
+                placeholder="Search recipes..."
+              />
             </div>
           </div>
         </div>
+
         <div className="columns is-multiline">
-          {this.state.recipes.map((recipe, index) => (
-            <div className="column is-6" key={recipe._id.toString()}>
+          {this.state.recipes.map((recipe) =>
+            <div className="column is-3" key={recipe._id.toString()}>
               <RecipeCard
                 photo={recipe.photo}
                 id={recipe._id}
@@ -68,7 +62,7 @@ class Home extends Component {
                 title={recipe.title}
               />
             </div>
-          ))}
+          )}
         </div>
       </div>
     );

@@ -26,12 +26,12 @@ class Recipe extends Component {
 
   render() {
     return (
-      <div className="App-body field">
+      <div className="App-body field narrow">
         <div className="columns">
           <div className="column is-full">
-            {this.state.error.map(error => (
+            {this.state.error.map(error =>
               <ErrorMessage error={error.message} />
-            ))}
+            )}
             <h1 className="is-centered">{this.state.title}</h1>
             <p className="is-centered">
               by
@@ -80,34 +80,34 @@ class Recipe extends Component {
             </table>
             <h2>Ingredients</h2>
             <ul>
-              {this.state.ingredients.map(ingredient => (
+              {this.state.ingredients.map(ingredient =>
                 <li key={ingredient.name.toString()}>
                   <b>{ingredient.qty}</b> {ingredient.name}
                 </li>
-              ))}
+              )}
             </ul>
           </div>
         </div>
         <div className="">
           <hr />
           <h2>Method</h2>
-          {this.state.method.map((step, index) => (
+          {this.state.method.map((step, index) =>
             <div>
               <h3>Step {index + 1}</h3>
               <p>{step}</p>
               <br />
             </div>
-          ))}
+          )}
           <hr />
           <h2>Comments</h2>
           {this.state.comments != null &&
-            this.state.comments.map(comment => (
+            this.state.comments.map(comment =>
               <Comment
                 key={comment.body}
                 author={comment.author}
                 body={comment.body}
               />
-            ))}
+            )}
           <CommentInput id={this.props.id} />
         </div>
       </div>

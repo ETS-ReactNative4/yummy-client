@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <div className="App">
         <Menu />
-        <div className="App-body content narrow">
+        <div className="App-body content">
           <BrowserRouter>
             <Switch>
               <Route path="/" component={Home} exact />

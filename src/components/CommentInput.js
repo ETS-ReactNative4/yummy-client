@@ -9,9 +9,9 @@ class CommentInput extends Component {
   }
 
   postComment() {
-    let content = document.getElementById("content").value;
-    let uid = 0;
-    let id = this.props.id;
+    const content = document.getElementById("content").value;
+    const uid = 0;
+    const id = this.props.id;
 
     Request.comment({id: id, uid: uid, content: content})
       .then(response => {

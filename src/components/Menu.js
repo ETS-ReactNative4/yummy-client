@@ -16,7 +16,7 @@ class Menu extends Component {
         $navbarBurgers.forEach(el => {
           el.addEventListener("click", () => {
             // Get the target from the "data-target" attribute
-            let menu = document.getElementById("navbar");
+            const menu = document.getElementById("navbar");
 
             // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
             el.classList.toggle("is-active");
@@ -25,6 +25,7 @@ class Menu extends Component {
         });
       }
     });
+
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">

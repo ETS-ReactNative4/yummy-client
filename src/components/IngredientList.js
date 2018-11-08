@@ -3,9 +3,12 @@ import "./IngredientList.css";
 //import IngredientAdd from "./IngredientAdd.js";
 
 class IngredientList extends Component {
-  state: {
-    ingredients: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      ingredients: []
+    };
+  }
   render() {
     return (
       <div className="ingredients-list">
@@ -18,9 +21,9 @@ class IngredientList extends Component {
     );
   }
 
-  addNewIngredient = () => {
-    let { ingredients } = this.state;
-    let newIngredient = { name: "", qty: 0 };
+  addNewIngredient() {
+    const { ingredients } = this.state;
+    const newIngredient = { name: "", qty: 0 };
     this.setState({
       ingredients: [...ingredients, newIngredient]
     });

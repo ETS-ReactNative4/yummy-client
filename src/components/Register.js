@@ -13,14 +13,14 @@ class Register extends Component {
   }
 
   register() {
-    let user = {
+    const user = {
       email: document.getElementById("user-email").value,
       username: document.getElementById("user-username").value,
       password: document.getElementById("user-password").value
     };
 
-    Request.register(user).then(response => {
-      window.location.href = '/';
+    Request.register(user).then(() => {
+      window.location.href = "/";
     }, rejected => {
       console.log(rejected);
       this.setState({error: [{message: "invalid"}]});
@@ -31,7 +31,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="App-body field">
+      <div className="App-body field narrow">
         {this.state.error.map(error => <ErrorMessage error={error.message} />)}
         <input
           className="input"

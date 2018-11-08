@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import "./RecipeCard.css";
 
 class RecipeCard extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    const MAX_DESCRIPTION_LENGTH = 120;
     return (
       <a href={"/recipe/" + this.props.id}>
         <div className="card">
@@ -22,8 +26,8 @@ class RecipeCard extends Component {
             </div>
 
             <div className="content">
-              {this.props.description.slice(0, 120)}
-              {this.props.description.length > 120 ? "..." : ""}
+              {this.props.description.slice(0, MAX_DESCRIPTION_LENGTH)}
+              {this.props.description.length > MAX_DESCRIPTION_LENGTH ? "..." : ""}
               <br />
               <br />
               <p className="muted">

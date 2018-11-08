@@ -4,7 +4,7 @@ import "./Login.css";
 class Login extends Component {
   render() {
     return (
-      <div className="App-body field">
+      <div className="App-body field narrow">
         <input
           className="input"
           type="text"
