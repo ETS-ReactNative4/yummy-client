@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bulma/css/bulma.min.css";
+import "font-awesome/css/font-awesome.min.css";
 import "./App.css";
 import * as Routes from "./Routes.js";
 import Create from "./components/Create.js";
@@ -10,7 +11,7 @@ import Footer from "./components/Footer.js";
 import Menu from "./components/Menu.js";
 import Register from "./components/Register.js";
 import Profile from "./components/Profile.js";
-import About from "./components/About";
+import MyRecipes from "./components/MyRecipes";
 
 class App extends Component {
   render() {
@@ -24,7 +25,7 @@ class App extends Component {
               <Route path="/create" component={Create} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route path="/about/" component={About} />
+              <Route path="/my-recipes/" component={MyRecipes} />
               <Route path="/profile" component={Profile} />
               <Route path="/recipe/:id" component={Routes.RecipeRoute} />
             </Switch>

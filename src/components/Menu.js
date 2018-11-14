@@ -55,8 +55,8 @@ class Menu extends Component {
             <a href="/profile" className="navbar-item">
               Profile
             </a>
-            <a href="/about" className="navbar-item">
-              About
+            <a href="/my-recipes" className="navbar-item">
+              My Recipes
             </a>
             <a href="/create" className="navbar-item">
               Create Recipe

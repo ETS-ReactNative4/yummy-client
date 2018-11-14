@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import * as Request from "../modules/request";
 import RecipeCard from "./RecipeCard.js";
+import ErrorMessage from "./ErrorMessage.js";
 import "./Home.css";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipes: []
+      recipes: [],
+      error: []
     };
     this.searchRecipes = this.searchRecipes.bind(this);
     this.options = ["title", "author", "description", "photo"];
@@ -22,12 +24,16 @@ class Home extends Component {
 
   searchRecipes() {
     const searchTerm = document.getElementById("search").value;
-    console.log(searchTerm, this.options);
     Request.getAllRecipes(this.options, searchTerm).then(response => {
-      console.log(response);
+      if (response.length === 0) {
+        const msg = "No results for '" + searchTerm + "'";
+        this.setState({error: [{message: msg}]});
+      } else {
+        this.setState({error: []});
+      }
       this.setState({ recipes: response });
     }, err => {
-      this.setState({error: {message: err.message}});
+      this.setState({error: [{message: err.message}]});
     });
   }
 
@@ -50,6 +56,8 @@ class Home extends Component {
             </div>
           </div>
         </div>
+
+        {this.state.error.map(error => <ErrorMessage error={error.message} />)}
 
         <div className="columns is-multiline">
           {this.state.recipes.map((recipe) =>

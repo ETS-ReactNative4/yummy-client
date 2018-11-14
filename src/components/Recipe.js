@@ -39,6 +39,12 @@ class Recipe extends Component {
               {this.state.author ? this.state.author : "Anonymous"}
               {" "}
             </p>
+            <button className="button is-rounded">
+              <span className="icon">
+                <i className="fa fa-check"></i>
+              </span>
+              <span>Save</span>
+            </button>
             <hr />
             <p>{this.state.description}</p>
             <figure className="image is-256x256">
