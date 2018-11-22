@@ -42,7 +42,7 @@ class Home extends Component {
       <div className="App-body">
         <div className="columns">
           <div className="column is-6">
-            <h1>All Recipes</h1>
+            <h1>Recipes</h1>
           </div>
           <div className="column is-6">
             <div className="control">
@@ -57,8 +57,19 @@ class Home extends Component {
           </div>
         </div>
 
-        {this.state.error.map(error => <ErrorMessage error={error.message} />)}
+        <div className="columns">
+          <div className="column is-12">
+            <div class="tabs">
+              <ul>
+                <li class="is-active"><a>Alphabetically</a></li>
+                <li><a>Most Views</a></li>
+                <li><a>Most Popular</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
+        {this.state.error.map(error => <ErrorMessage error={error.message} />)}
         <div className="columns is-multiline">
           {this.state.recipes.map((recipe) =>
             <div className="column is-3" key={recipe._id.toString()}>

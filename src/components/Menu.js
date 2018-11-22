@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import LoginButton from "./LoginButton.js";
+import LogoutButton from "./LogoutButton.js";
 import "./Menu.css";
 
 class Menu extends Component {
   render() {
+    let button;
     document.addEventListener("DOMContentLoaded", () => {
       // Get all "navbar-burger" elements
       const $navbarBurgers = Array.prototype.slice.call(
@@ -24,6 +27,7 @@ class Menu extends Component {
           });
         });
       }
+      button = localStorage.getItem("jwt") ? <LoginButton /> : <LogoutButton />;
     });
 
     return (
@@ -63,9 +67,7 @@ class Menu extends Component {
             </a>
             <div className="navbar-item">
               <div className="buttons">
-                <a href="/login" className="button is-info">
-                  <strong>Log In</strong>
-                </a>
+                {localStorage.getItem("jwt") ? <LogoutButton /> : <LoginButton />}
               </div>
             </div>
           </div>

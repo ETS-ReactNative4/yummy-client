@@ -39,12 +39,6 @@ class Recipe extends Component {
               {this.state.author ? this.state.author : "Anonymous"}
               {" "}
             </p>
-            <button className="button is-rounded">
-              <span className="icon">
-                <i className="fa fa-check"></i>
-              </span>
-              <span>Save</span>
-            </button>
             <hr />
             <p>{this.state.description}</p>
             <figure className="image is-256x256">
@@ -104,6 +98,17 @@ class Recipe extends Component {
               <br />
             </div>
           )}
+          <div className="field is-grouped">
+            <button className="control button is-rounded">
+              <span className="icon">
+                <i className="fa fa-check"></i>
+              </span>
+              <span>Save to favourites</span>
+            </button>
+            <span className="control button no-hover is-white is-rounded has-text-grey is-right">
+              <i className="fa fa-eye"></i>  {this.state.views ? this.state.views : "?"}
+            </span>
+          </div>
           <hr />
           <h2>Comments</h2>
           {this.state.comments != null &&

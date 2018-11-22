@@ -30,6 +30,8 @@ class Create extends Component {
     Request.addRecipe(recipe).then(() => {
       alert("Added recipe");
     }).catch(err => {
+      console.log("error: ",err);
+      //window.location.href = "/login";
       console.error("Could not add recipe. Error: ", err);
     });
   }

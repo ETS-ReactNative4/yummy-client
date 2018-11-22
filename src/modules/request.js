@@ -1,5 +1,8 @@
 const url = "http://localhost:8000/api/v1/";
 const axios = require("axios");
+const config = {
+  headers: {}
+};
 
 /*
  * Requests all recipes data
@@ -75,7 +78,7 @@ export function comment(comment) {
   };
 
   return new Promise((resolve, reject) => {
-    axios.post(url + urlExtension, data).then(response => {
+    axios.post(url + urlExtension, data, config).then(response => {
       resolve(response);
     }).catch(err => {
       reject(err);
@@ -100,18 +103,45 @@ export function register(user) {
   });
 }
 
+/**
+ * Sends request to add recipe to database
+ * @param {object} recipe - contains recipe attributes (title, photo etc.)
+ */
 export function addRecipe(recipe) {
-  console.log("Trying to add recipe");
-  console.log(recipe);
   const urlExtension = "recipe";
+  const jwt = getJwtToken();
+  config.headers = {
+    Authorization: "Bearer " + getJwtToken()
+  };
 
   return new Promise((resolve, reject) => {
-    axios.post(url + urlExtension, recipe).then(response => {
+    axios.post(url + urlExtension, recipe, config).then(response => {
+      resolve(response);
+    }).catch(err => {
+      console.error(err);
+      reject(err);
+    });
+  });
+}
+
+/**
+ * Sends request to log user in
+ * @param {object} user - contains username, password
+ */
+export function login(user) {
+  const urlExtension = "login";
+  return new Promise((resolve, reject) => {
+    axios.post(url + urlExtension, user).then(response => {
+      localStorage.setItem("jwt", response.data.token);
       resolve(response);
     }).catch(err => {
       reject(err);
     });
   });
+}
+
+function getJwtToken() {
+  return localStorage.getItem("jwt");
 }
 
 /*

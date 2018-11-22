@@ -2,3 +2,7 @@
   background: #efefef;
 }
 
+.no-hover:hover {
+  background: white;
+}
+
