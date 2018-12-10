@@ -4,14 +4,12 @@ const config = {
   headers: {}
 };
 
-/*
- * Requests all recipes data
+/* Requests all recipes data
  * @param {object} options - specifics to search for (title, author... etc.)
  */
 export function getAllRecipes(options, order=null, searchTerm=null) {
   let urlExtension = "?fields=";
   urlExtension = urlExtension += buildUrl(options, searchTerm, order);
-
   return new Promise((resolve, reject) => {
     axios.get(url + "all" + urlExtension).then(response => {
       resolve(response.data);
@@ -74,17 +72,20 @@ export function getComments() {
  * @param {object} comment - contains recipe id, user id and content
  */
 export function comment(comment) {
-  const urlExtension = `comment/${comment.id}/${comment.uid}/${comment.content}`;
+  const urlExtension = "comment/";
   const data = {
     id: comment.id,
-    uid: comment.uid,
+    uid: getUserId(),
     content: comment.content
   };
+
+  config.headers = getAuthHeader();
 
   return new Promise((resolve, reject) => {
     axios.post(url + urlExtension, data, config).then(response => {
       resolve(response);
     }).catch(err => {
+      console.log(err.message);
       reject(err);
     });
   });
@@ -109,10 +110,7 @@ export function register(user) {
 
 export function saveRecipe(recipe) {
   const urlExtension = `save/${recipe._id}/` + getUserId();
-  const jwt = getJwtToken();
-  config.headers = {
-    Authorization: "Bearer " + jwt
-  };
+  config.headers = getAuthHeader();
 
   return new Promise((resolve, reject) => {
     axios.post(url + urlExtension).then(response => {
@@ -123,16 +121,19 @@ export function saveRecipe(recipe) {
   });
 }
 
+function getAuthHeader() {
+  return {
+    Authorization: "Bearer " + getJwtToken()
+  };
+}
+
 /**
  * Sends request to add recipe to database
  * @param {object} recipe - contains recipe attributes (title, photo etc.)
  */
 export function addRecipe(recipe) {
   const urlExtension = "recipe";
-  const jwt = getJwtToken();
-  config.headers = {
-    Authorization: "Bearer " + getJwtToken()
-  };
+  config.headers = getAuthHeader();
 
   return new Promise((resolve, reject) => {
     axios.post(url + urlExtension, recipe, config).then(response => {
@@ -153,6 +154,7 @@ export function login(user) {
   return new Promise((resolve, reject) => {
     axios.post(url + urlExtension, user).then(response => {
       localStorage.setItem("jwt", response.data.token);
+      localStorage.setItem("username", response.data.user[0].username);
       resolve(response);
     }).catch(err => {
       reject(err);

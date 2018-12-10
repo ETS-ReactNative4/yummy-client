@@ -20,6 +20,7 @@ class Recipe extends Component {
 
     Request.getRecipe(this.props.id).then(response => {
       this.setState(response[0]);
+      console.log(this.state);
     }, err => {
       this.setState({error: [{message: err.message}] });
     });
