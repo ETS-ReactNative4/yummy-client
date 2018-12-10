@@ -6,3 +6,18 @@
 .card {
   margin-bottom: 1em;
 }
+
+i {
+  margin-left: 5px;
+}
+
+.tabs ul, .tabs a {
+ // border-bottom: none;
+}
+
+.tabs ul { 
+  align-items: baseline;
+  margin-left: 0;
+}
+
+

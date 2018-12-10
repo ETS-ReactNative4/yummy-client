@@ -1,4 +1,4 @@
-const url = "http://localhost:8000/api/v1/";
+const url = "http://localhost:8080/api/v1/";
 const axios = require("axios");
 const config = {
   headers: {}
@@ -8,9 +8,9 @@ const config = {
  * Requests all recipes data
  * @param {object} options - specifics to search for (title, author... etc.)
  */
-export function getAllRecipes(options, searchTerm=null) {
+export function getAllRecipes(options, order=null, searchTerm=null) {
   let urlExtension = "?fields=";
-  urlExtension = urlExtension += buildUrl(options, searchTerm);
+  urlExtension = urlExtension += buildUrl(options, searchTerm, order);
 
   return new Promise((resolve, reject) => {
     axios.get(url + "all" + urlExtension).then(response => {
@@ -22,7 +22,7 @@ export function getAllRecipes(options, searchTerm=null) {
   });
 }
 
-function buildUrl(options=[], searchTerm=null) {
+function buildUrl(options=[], searchTerm=null, order) {
   let url = "";
 
   options.forEach(option => {
@@ -32,6 +32,10 @@ function buildUrl(options=[], searchTerm=null) {
   if (searchTerm) {
     url += options && searchTerm ? "&" : "?";
     url += "search=" + searchTerm;
+  }
+
+  if (order) {
+    url += "&order=" + order;
   }
 
   return url;

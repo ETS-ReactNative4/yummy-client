@@ -9,16 +9,21 @@ class Home extends Component {
     super(props);
     this.state = {
       recipes: [],
-      error: []
+      errors: []
     };
     this.searchRecipes = this.searchRecipes.bind(this);
+    this.sortByAlphabet = this.sortByAlphabet.bind(this);
+    this.sortByViews = this.sortByViews.bind(this);
+    this.getAllRecipes = this.getAllRecipes.bind(this);
     this.options = ["title", "author", "description", "photo"];
+    this.getAllRecipes();
+  }
 
-    Request.getAllRecipes(this.options).then(response => {
-      console.log(response);
+  getAllRecipes(order=null) {
+    Request.getAllRecipes(this.options, order).then(response => {
       this.setState({ recipes: response });
-    }, err => {
-      this.setState({error: {message: err.message}});
+    }).catch(err => {
+      this.setState({errors: {message: err.message}});
     });
   }
 
@@ -27,14 +32,34 @@ class Home extends Component {
     Request.getAllRecipes(this.options, searchTerm).then(response => {
       if (response.length === 0) {
         const msg = "No results for '" + searchTerm + "'";
-        this.setState({error: [{message: msg}]});
+        this.setState({errors: [{message: msg}]});
       } else {
-        this.setState({error: []});
+        this.setState({errors: []});
       }
       this.setState({ recipes: response });
-    }, err => {
-      this.setState({error: [{message: err.message}]});
+    }).catch(err => {
+      this.setState({errors: [{message: err.message}]});
     });
+  }
+
+  sortByAlphabet() {
+  //Set config options
+    const order = "alphabet";
+    this.getAllRecipes(order);
+    const alphabetBtn = document.getElementById("sort-alphabet");
+    const viewsBtn = document.getElementById("sort-views");
+    alphabetBtn.classList.add("is-active");
+    viewsBtn.classList.remove("is-active");
+  }
+
+  sortByViews() {
+  //Request all recipes order by views
+    const order = "views";
+    this.getAllRecipes(order);
+    const alphabetBtn = document.getElementById("sort-alphabet");
+    const viewsBtn = document.getElementById("sort-views");
+    alphabetBtn.classList.remove("is-active");
+    viewsBtn.classList.add("is-active");
   }
 
   render() {
@@ -59,20 +84,26 @@ class Home extends Component {
 
         <div className="columns">
           <div className="column is-12">
-            <div class="tabs">
+            <div className="tabs is-centered">
               <ul>
-                <li class="is-active"><a>Alphabetically</a></li>
-                <li><a>Most Views</a></li>
-                <li><a>Most Popular</a></li>
+                <li onClick={this.sortByAlphabet} id="sort-alphabet" className="is-active">
+                  <a>Alphabetically
+                    <i className="fa fa-sort-alpha-asc"></i>
+                  </a>
+                </li>
+                <li onClick={this.sortByViews} id="sort-views" >
+                  <a>Most Views
+                    <i className="fa fa-sort-numeric-desc"></i>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {this.state.error.map(error => <ErrorMessage error={error.message} />)}
-        <div className="columns is-multiline">
+        <div className="columns is-multiline is-mobile">
           {this.state.recipes.map((recipe) =>
-            <div className="column is-3" key={recipe._id.toString()}>
+            <div className="column is-4-tablet is-3-desktop is-12-mobile" key={recipe._id.toString()}>
               <RecipeCard
                 photo={recipe.photo}
                 id={recipe._id}
