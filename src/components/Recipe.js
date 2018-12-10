@@ -8,6 +8,7 @@ import "./Recipe.css";
 class Recipe extends Component {
   constructor(props) {
     super(props);
+    this.saveRecipe = this.saveRecipe.bind(this);
     this.state = {
       ingredients: [],
       method: [],
@@ -22,6 +23,11 @@ class Recipe extends Component {
     }, err => {
       this.setState({error: [{message: err.message}] });
     });
+  }
+
+  saveRecipe() {
+    console.log(this.state);
+    Request.saveRecipe(this.state);
   }
 
   render() {
@@ -99,7 +105,7 @@ class Recipe extends Component {
             </div>
           )}
           <div className="field is-grouped">
-            <button className="control button is-rounded">
+            <button onClick={this.saveRecipe} className="control button is-rounded">
               <span className="icon">
                 <i className="fa fa-check"></i>
               </span>

@@ -107,6 +107,22 @@ export function register(user) {
   });
 }
 
+export function saveRecipe(recipe) {
+  const urlExtension = `save/${recipe._id}/` + getUserId();
+  const jwt = getJwtToken();
+  config.headers = {
+    Authorization: "Bearer " + jwt
+  };
+
+  return new Promise((resolve, reject) => {
+    axios.post(url + urlExtension).then(response => {
+      resolve(response);
+    }).catch(err => {
+      reject(err);
+    });
+  });
+}
+
 /**
  * Sends request to add recipe to database
  * @param {object} recipe - contains recipe attributes (title, photo etc.)
@@ -146,6 +162,10 @@ export function login(user) {
 
 function getJwtToken() {
   return localStorage.getItem("jwt");
+}
+
+function getUserId() {
+  return localStorage.getItem("userId");
 }
 
 /*
