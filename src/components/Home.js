@@ -17,11 +17,15 @@ class Home extends Component {
     this.sortByViews = this.sortByViews.bind(this);
     this.getAllRecipes = this.getAllRecipes.bind(this);
     this.options = ["title", "author", "description", "photo"];
+  }
+
+  componentDidMount() {
     this.getAllRecipes();
   }
 
   getAllRecipes(order=null) {
-    Request.getAllRecipes(this.options, order).then(response => {
+    const searchTerm = document.getElementById("search").value;
+    Request.getAllRecipes(this.options, searchTerm, order).then(response => {
       this.setState({ recipes: response });
     }).catch(err => {
       this.setState({errors: {message: err.message}});
@@ -29,7 +33,6 @@ class Home extends Component {
   }
 
   searchRecipes() {
-    console.log("Searching...");
     const searchTerm = document.getElementById("search").value;
     Request.getAllRecipes(this.options, searchTerm, null).then(response => {
       if (response.length === 0) {

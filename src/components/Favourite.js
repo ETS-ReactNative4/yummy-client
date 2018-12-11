@@ -3,10 +3,7 @@ import * as Request from "../modules/request.js";
 import "./Favourite.css";
 
 class Favourite extends Component {
-  constuctor(props) {
-    super(props);
-    this.state = {favourite: false};
-  }
+  state = {favourite: false};
 
   componentDidMount() {
     this.isRecipeFavourite();

@@ -7,7 +7,7 @@ const config = {
 /* Requests all recipes data
  * @param {object} options - specifics to search for (title, author... etc.)
  */
-export function getAllRecipes(options, order=null, searchTerm=null) {
+export function getAllRecipes(options, searchTerm=null, order=null) {
   let urlExtension = "?fields=";
   urlExtension = urlExtension += buildUrl(options, searchTerm, order);
   return new Promise((resolve, reject) => {
@@ -20,21 +20,17 @@ export function getAllRecipes(options, order=null, searchTerm=null) {
   });
 }
 
-function buildUrl(options=[], searchTerm=null, order) {
+function buildUrl(options=[], searchTerm=null, order=null) {
   let url = "";
 
   options.forEach(option => {
     url += "," + option;
   });
+  if (searchTerm === null) searchTerm = "";
+  if (order === null) order = "";
 
-  if (searchTerm) {
-    url += options && searchTerm ? "&" : "?";
-    url += "search=" + searchTerm;
-  }
+  url += "&search=" + searchTerm + "&order=" + order;
 
-  if (order) {
-    url += "&order=" + order;
-  }
 
   return url;
 }
