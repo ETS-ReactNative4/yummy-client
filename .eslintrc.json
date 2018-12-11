@@ -2,6 +2,7 @@
   "plugins": [
     "react"
   ],
+  "parser": "babel-eslint",
   "env": {
     "es6": true,
     "jasmine": true,
@@ -31,7 +32,7 @@
     "max-depth": ["error", 3],
     "max-len": ["warn", { "code": 120, "tabWidth": 4 }],
     "max-lines": ["error", 300],
-    "max-lines-per-function": ["error", 100],
+    "max-lines-per-function": ["error", 150],
     "max-nested-callbacks": ["error", 4],
     "max-params": ["error", 5],
     "max-statements": ["error", 10],

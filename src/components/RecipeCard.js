@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Favourite from "./Favourite";
 import "./RecipeCard.css";
 
 class RecipeCard extends Component {
@@ -16,9 +17,18 @@ class RecipeCard extends Component {
           <div className="card-content">
             <div className="media">
               <div className="media-content">
-                <p className="title is-4">
-                  {this.props.title}
-                </p>
+                <div className="columns is-mobile">
+                  <div className="column is-9 is-9-mobile">
+                    <p className="title is-4">
+                      {this.props.title}
+                    </p>
+                  </div>
+                  <div className="column is-3 is-3-mobile">
+                    <span className="subtitle">
+                      <Favourite id={this.props.id}/>
+                    </span>
+                  </div>
+                </div>
                 <p className="subtitle is-6">
                   {this.props.author ? this.props.author : "Anonymous"}
                 </p>

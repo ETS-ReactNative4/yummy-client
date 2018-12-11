@@ -17,8 +17,7 @@ class Menu extends Component {
       if ($navbarBurgers.length > 0) {
         // Add a click event on each of them
         $navbarBurgers.forEach(el => {
-          el.addEventListener("click", () => {
-            // Get the target from the "data-target" attribute
+          el.addEventListener("click", () => { // Get the target from the "data-target" attribute
             const menu = document.getElementById("navbar");
 
             // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
@@ -55,15 +54,14 @@ class Menu extends Component {
             <a href="/" className="navbar-item">
               Home
             </a>
-
-            <a href="/profile" className="navbar-item">
-              Profile
-            </a>
             <a href="/my-recipes" className="navbar-item">
               My Recipes
             </a>
             <a href="/create" className="navbar-item">
               Create Recipe
+            </a>
+            <a href="/profile" className="navbar-item">
+              Profile
             </a>
             <div className="navbar-item">
               <div className="buttons">

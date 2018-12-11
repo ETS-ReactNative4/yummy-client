@@ -9,7 +9,8 @@ class Home extends Component {
     super(props);
     this.state = {
       recipes: [],
-      errors: []
+      errors: [],
+      order: "alphabet"
     };
     this.searchRecipes = this.searchRecipes.bind(this);
     this.sortByAlphabet = this.sortByAlphabet.bind(this);
@@ -28,8 +29,9 @@ class Home extends Component {
   }
 
   searchRecipes() {
+    console.log("Searching...");
     const searchTerm = document.getElementById("search").value;
-    Request.getAllRecipes(this.options, searchTerm).then(response => {
+    Request.getAllRecipes(this.options, searchTerm, null).then(response => {
       if (response.length === 0) {
         const msg = "No results for '" + searchTerm + "'";
         this.setState({errors: [{message: msg}]});
@@ -37,6 +39,7 @@ class Home extends Component {
         this.setState({errors: []});
       }
       this.setState({ recipes: response });
+      console.log(this.state.recipes);
     }).catch(err => {
       this.setState({errors: [{message: err.message}]});
     });

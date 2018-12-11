@@ -162,6 +162,45 @@ export function login(user) {
   });
 }
 
+export function addToFavourites(id) {
+  const urlExtension = "favourites/add/";
+  config.headers = getAuthHeader();
+  return new Promise((resolve, reject) => {
+    axios.post(url + urlExtension,
+      {id: id, userId: getUserId()}, config)
+      .then(response => {
+        resolve(response);
+      }).catch(err => {
+        reject(err);
+      });
+  });
+}
+
+export function removeFromFavourites(id) {
+  const urlExtension = "favourites/remove/";
+  config.headers = getAuthHeader();
+  return new Promise((resolve, reject) => {
+    axios.post(url + urlExtension,
+      {id: id, userId: getUserId()}, config)
+      .then(response => {
+        resolve(response);
+      }).catch(err => {
+        reject(err);
+      });
+  });
+}
+
+export async function checkIfFavourite(id) {
+  const urlExtension = "favourites/check";
+  config.headers = getAuthHeader();
+  const response = await axios.post(
+    url + urlExtension,
+    {id: id, userId: getUserId()},
+    config
+  );
+  return response.data.favourite;
+}
+
 function getJwtToken() {
   return localStorage.getItem("jwt");
 }

@@ -3,3 +3,11 @@
   overflow-y: hidden;
 }
 
+.right-align {
+  float: right;
+}
+
+i.fa-heart-o:hover {
+  color: #e62f2f; 
+}
+

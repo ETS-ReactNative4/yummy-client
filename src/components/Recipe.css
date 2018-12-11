@@ -2,6 +2,10 @@
   background: #efefef;
 }
 
+i {
+  cursor: pointer;
+}
+
 .no-hover:hover {
   background: white;
 }

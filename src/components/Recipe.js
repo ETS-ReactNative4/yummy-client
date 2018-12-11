@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as Request from "../modules/request";
 import Comment from "./Comment.js";
 import CommentInput from "./CommentInput.js";
+import Favourite from "./Favourite.js";
 import ErrorMessage from "./ErrorMessage.js";
 import "./Recipe.css";
 
@@ -27,7 +28,6 @@ class Recipe extends Component {
   }
 
   saveRecipe() {
-    console.log(this.state);
     Request.saveRecipe(this.state);
   }
 
@@ -45,6 +45,7 @@ class Recipe extends Component {
               {" "}
               {this.state.author ? this.state.author : "Anonymous"}
               {" "}
+              <Favourite id={this.state._id} />
             </p>
             <hr />
             <p>{this.state.description}</p>
