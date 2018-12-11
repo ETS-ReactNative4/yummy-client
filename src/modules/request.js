@@ -20,6 +20,7 @@ export function getAllRecipes(options, searchTerm=null, order=null) {
   });
 }
 
+
 function buildUrl(options=[], searchTerm=null, order=null) {
   let url = "";
 
@@ -195,6 +196,16 @@ export async function checkIfFavourite(id) {
     config
   );
   return response.data.favourite;
+}
+
+export async function getAllFavourites() {
+  const urlExtension = "favourites/all/" + getUserId();
+  config.headers = getAuthHeader();
+  const response = await axios.get(
+    url + urlExtension,
+    config
+  );
+  return response.data;
 }
 
 function getJwtToken() {
