@@ -4,9 +4,15 @@ import "./LoginButton.css";
 class LoginButton extends Component {
   render() {
     return (
-      <a href="/login" className="button is-info">
-        <strong>Log In</strong>
-      </a>
+      <div className="navbar-item">
+        <div className="field">
+          <p className="control">
+            <a href="/login" className="button is-primary">
+              <strong>Log In</strong>
+            </a>
+          </p>
+        </div>
+      </div>
     );
   }
 }

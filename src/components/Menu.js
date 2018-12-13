@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LoginButton from "./LoginButton.js";
-import LogoutButton from "./LogoutButton.js";
+import LoggedInButton from "./LoggedInButton.js";
 import "./Menu.css";
 
 class Menu extends Component {
@@ -24,8 +24,10 @@ class Menu extends Component {
       });
     }
   }
+
   render() {
-    const button = localStorage.getItem("jwt") ? <LoginButton /> : <LogoutButton />;
+    const button = localStorage.getItem("jwt") ? <LoggedInButton /> : <LoginButton />;
+    console.log(button);
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
@@ -48,28 +50,10 @@ class Menu extends Component {
           <div className="navbar-start" />
 
           <div className="navbar-end">
-
-            <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">
-                Profile
-              </a>
-
-              <div className="navbar-dropdown">
-                <a href="/my-recipes" className="navbar-item">
-                  My Recipes
-                </a>
-                <a className="navbar-item">
-                  Profile
-                </a>
-                <hr className="navbar-divider" />
-                <a className="navbar-item">
-                  Log Out
-                </a>
-              </div>
-            </div>
             <a href="/create" className="navbar-item">
               Create Recipe
             </a>
+            {button}
           </div>
         </div>
       </nav>
