@@ -4,31 +4,28 @@ import LogoutButton from "./LogoutButton.js";
 import "./Menu.css";
 
 class Menu extends Component {
-  render() {
-    let button;
-    document.addEventListener("DOMContentLoaded", () => {
-      // Get all "navbar-burger" elements
-      const $navbarBurgers = Array.prototype.slice.call(
-        document.querySelectorAll(".navbar-burger"),
-        0
-      );
+  componentDidMount() {
+    const $navbarBurgers = Array.prototype.slice.call(
+      document.querySelectorAll(".navbar-burger"),
+      0
+    );
 
-      // Check if there are any navbar burgers
-      if ($navbarBurgers.length > 0) {
-        // Add a click event on each of them
-        $navbarBurgers.forEach(el => {
-          el.addEventListener("click", () => { // Get the target from the "data-target" attribute
-            const menu = document.getElementById("navbar");
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+      // Add a click event on each of them
+      $navbarBurgers.forEach(el => {
+        el.addEventListener("click", () => { // Get the target from the "data-target" attribute
+          const menu = document.getElementById("navbar");
 
-            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-            el.classList.toggle("is-active");
-            menu.classList.toggle("is-active");
-          });
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle("is-active");
+          menu.classList.toggle("is-active");
         });
-      }
-      button = localStorage.getItem("jwt") ? <LoginButton /> : <LogoutButton />;
-    });
-
+      });
+    }
+  }
+  render() {
+    const button = localStorage.getItem("jwt") ? <LoginButton /> : <LogoutButton />;
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
@@ -51,23 +48,28 @@ class Menu extends Component {
           <div className="navbar-start" />
 
           <div className="navbar-end">
-            <a href="/" className="navbar-item">
-              Home
-            </a>
-            <a href="/my-recipes" className="navbar-item">
-              My Recipes
-            </a>
+
+            <div className="navbar-item has-dropdown is-hoverable">
+              <a className="navbar-link">
+                Profile
+              </a>
+
+              <div className="navbar-dropdown">
+                <a href="/my-recipes" className="navbar-item">
+                  My Recipes
+                </a>
+                <a className="navbar-item">
+                  Profile
+                </a>
+                <hr className="navbar-divider" />
+                <a className="navbar-item">
+                  Log Out
+                </a>
+              </div>
+            </div>
             <a href="/create" className="navbar-item">
               Create Recipe
             </a>
-            <a href="/profile" className="navbar-item">
-              Profile
-            </a>
-            <div className="navbar-item">
-              <div className="buttons">
-                {localStorage.getItem("jwt") ? <LogoutButton /> : <LoginButton />}
-              </div>
-            </div>
           </div>
         </div>
       </nav>

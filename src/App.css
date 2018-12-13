@@ -1,10 +1,14 @@
+html {
+  background: #f9f9f9;
+}
+
 @media only screen and (min-width: 768px) {
   .narrow  {
     width: 80ch;
     margin: 0 auto;
   }
   .card {
-    height: 500px;
+    height: 400px;
   }
 }
 
@@ -21,6 +25,11 @@
   padding: 1em;
 }
 
+.App-body.white {
+  background: white;
+}
+
+
 
 
 .App-link {
@@ -36,8 +45,8 @@
 }
 
 button {
-  background: #fa983a;
-  color: white;
+  background: transparent;
+  color: #488c90;
   border: none;
   padding: 1em;
   cursor: pointer;

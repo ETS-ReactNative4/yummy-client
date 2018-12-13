@@ -198,8 +198,10 @@ export async function checkIfFavourite(id) {
   return response.data.favourite;
 }
 
-export async function getAllFavourites() {
-  const urlExtension = "favourites/all/" + getUserId();
+export async function getAllFavourites(sort) {
+  console.log("Getting favourites");
+  const urlExtension = "favourites/all/" + getUserId() + "/" + sort;
+  console.log(url + urlExtension);
   config.headers = getAuthHeader();
   const response = await axios.get(
     url + urlExtension,

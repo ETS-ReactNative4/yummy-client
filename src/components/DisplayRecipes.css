@@ -1,0 +1,15 @@
+.select {
+  margin-left: 5px;
+}
+
+.select.is-primary {
+  //background: #488c90;
+  color: white;
+  border: 0;
+}
+
+.select select {
+  background: #488c90;
+  color: white;
+  border: 0;
+}

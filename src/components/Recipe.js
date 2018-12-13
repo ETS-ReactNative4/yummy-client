@@ -107,12 +107,6 @@ class Recipe extends Component {
             </div>
           )}
           <div className="field is-grouped">
-            <button onClick={this.saveRecipe} className="control button is-rounded">
-              <span className="icon">
-                <i className="fa fa-check"></i>
-              </span>
-              <span>Save to favourites</span>
-            </button>
             <span className="control button no-hover is-white is-rounded has-text-grey is-right">
               <i className="fa fa-eye"></i>  {this.state.views ? this.state.views : "?"}
             </span>

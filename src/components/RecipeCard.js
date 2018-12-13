@@ -19,23 +19,23 @@ class RecipeCard extends Component {
               <div className="media-content">
                 <div className="columns is-mobile">
                   <div className="column is-9 is-9-mobile">
-                    <p className="title is-4">
+                    <p className="title is-6">
                       {this.props.title}
                     </p>
                   </div>
                   <div className="column is-3 is-3-mobile">
-                    <span className="subtitle">
+                    <span className="subtitle is-overlay favourite-btn-wrapper">
                       <Favourite id={this.props.id}/>
                     </span>
                   </div>
                 </div>
-                <p className="subtitle is-6">
-                  {this.props.author ? this.props.author : "Anonymous"}
-                </p>
               </div>
             </div>
 
-            <div className="content">
+            <div className="content is-small">
+              <p className="">
+                {this.props.author ? this.props.author : "Anonymous"}
+              </p>
               {this.props.description.slice(0, MAX_DESCRIPTION_LENGTH)}
               {this.props.description.length > MAX_DESCRIPTION_LENGTH ? "..." : ""}
               <br />
