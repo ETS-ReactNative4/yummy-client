@@ -14,16 +14,16 @@ class Create extends Component {
   }
 
   scrapeForm() {
-    console.log("Validating");
     const title = document.getElementById("input-title").value;
     const description = document.getElementById("textarea-description").innerHTML;
     const serves = document.getElementById("input-serves").value;
-    //let ingredients = document.getElementById("textarea-ingredients").innerHTML;
+    const ingredients = document.getElementById("textarea-ingredients").innerHTML;
 
     const recipe = {
       title: title,
       author: "Ed Prince",
       description: description,
+      ingredients: ingredients,
       serves: serves
     };
 
