@@ -29,6 +29,10 @@ html {
   background: white;
 }
 
+.App-body.content {
+  min-height: 61vh;
+}
+
 
 
 
@@ -50,6 +54,11 @@ button {
   border: none;
   padding: 1em;
   cursor: pointer;
+}
+
+.button.is-primary {
+  background: #488c90;
+  color: white;
 }
 
 input, textarea {
