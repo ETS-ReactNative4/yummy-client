@@ -14,7 +14,7 @@ class IngredientList extends Component {
       <div className="ingredients-list">
         <textarea
           className="textarea"
-          id="ingredients-csv"
+          id="textarea-ingredients"
           placeholder="2 Onions, 300ml Stock, ..."
         />
       </div>

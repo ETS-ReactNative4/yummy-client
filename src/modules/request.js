@@ -130,8 +130,9 @@ function getAuthHeader() {
  */
 export function addRecipe(recipe) {
   const urlExtension = "recipe";
-  config.headers = getAuthHeader();
 
+  recipe.userId = getUserId();
+  config.headers = getAuthHeader();
   return new Promise((resolve, reject) => {
     axios.post(url + urlExtension, recipe, config).then(response => {
       resolve(response);

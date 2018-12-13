@@ -10,30 +10,48 @@ class Create extends Component {
     this.state = {
       err: null
     };
-    this.scrapeForm = this.scrapeForm.bind(this);
   }
 
-  scrapeForm() {
-    const title = document.getElementById("input-title").value;
-    const description = document.getElementById("textarea-description").innerHTML;
-    const serves = document.getElementById("input-serves").value;
-    const ingredients = document.getElementById("textarea-ingredients").innerHTML;
+  save = () => {
+    const recipe = this.scrapeForm();
+    recipe.published = "false";
+    this.sendRequest(recipe);
+  }
 
-    const recipe = {
-      title: title,
-      author: "Ed Prince",
-      description: description,
-      ingredients: ingredients,
-      serves: serves
-    };
+  publish = () => {
+    const recipe = this.srapeForm();
+    recipe.published = "true";
+    this.sendRequest(recipe);
+  }
 
+  sendRequest = (recipe) => {
     Request.addRecipe(recipe).then(() => {
       alert("Added recipe");
     }).catch(err => {
-      console.log("error: ",err);
-      //window.location.href = "/login";
       console.error("Could not add recipe. Error: ", err);
     });
+  }
+
+  scrapeForm = () => {
+    const title = document.getElementById("input-title").value;
+    const description = document.getElementById("textarea-description").value;
+    const method = document.getElementById("textarea-method").value;
+    const serves = document.getElementById("input-serves").value;
+    const prep = document.getElementById("input-prep").value;
+    const cook = document.getElementById("input-cook").value;
+    const ingredients = document.getElementById("textarea-ingredients").value;
+
+    const recipe = {
+      title: title,
+      description: description,
+      ingredients: ingredients,
+      serves: serves,
+      method: method,
+      prep: prep,
+      cook: cook
+    };
+
+    return recipe;
   }
 
   render() {
@@ -68,6 +86,23 @@ class Create extends Component {
             />
           </div>
         </div>
+
+
+        <div className="field is-horizontal">
+          <div className="field-body">
+            <div className="field">
+              <p className="control is-expanded">
+                <input id="input-prep" className="input" type="text" placeholder="Prep time" />
+              </p>
+            </div>
+            <div className="field">
+              <p className="control is-expanded">
+                <input id="input-cook" className="input" type="email" placeholder="Cook time" />
+              </p>
+            </div>
+          </div>
+        </div>
+
         <textarea
           className="textarea"
           placeholder="Description"
@@ -83,20 +118,20 @@ class Create extends Component {
         <h3>Method</h3>
         <hr />
         <textarea
+          id="textarea-method"
           className="textarea"
           placeholder="Step 1: Add step information here"
         />
-        <button className="button is-info">Add Step</button>
         <hr />
         <div className="buttons">
           <button
-            onClick={this.scrapeForm}
+            onClick={this.save}
             id="btn-save-recipe"
             className="button is-success is-right"
           >
             Save Recipe
           </button>
-          <button className="button is-danger">Publish Recipe</button>
+          <button onClick={this.publish} className="button is-danger">Publish Recipe</button>
         </div>
       </div>
     );
