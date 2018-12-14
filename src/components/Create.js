@@ -19,7 +19,7 @@ class Create extends Component {
   }
 
   publish = () => {
-    const recipe = this.srapeForm();
+    const recipe = this.scrapeForm();
     recipe.published = "true";
     this.sendRequest(recipe);
   }
@@ -35,6 +35,7 @@ class Create extends Component {
   scrapeForm = () => {
     const title = document.getElementById("input-title").value;
     const description = document.getElementById("textarea-description").value;
+    const photo = document.getElementById("input-photo").value;
     const method = document.getElementById("textarea-method").value;
     const serves = document.getElementById("input-serves").value;
     const prep = document.getElementById("input-prep").value;
@@ -48,7 +49,8 @@ class Create extends Component {
       serves: serves,
       method: method,
       prep: prep,
-      cook: cook
+      cook: cook,
+      photo: photo
     };
 
     return recipe;

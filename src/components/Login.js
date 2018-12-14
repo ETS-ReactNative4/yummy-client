@@ -51,7 +51,7 @@ class Login extends Component {
           name="password"
           placeholder="Password"
         />
-        <button onClick={this.loginRequest} className="button is-info center" type="submit">Log In</button>
+        <button onClick={this.loginRequest} className="button is-primary center" type="submit">Log In</button>
         <div className="text-center">
           <p>Not got an account?</p>
           <a className="text-center" href="/register">Register</a>
