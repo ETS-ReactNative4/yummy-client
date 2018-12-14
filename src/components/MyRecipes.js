@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import RecipeCard from "./RecipeCard.js";
 import ErrorMessage from "./ErrorMessage.js";
 import DisplayRecipes from "./DisplayRecipes.js";
-import * as Request from "../modules/request.js";
 import "./MyRecipes.css";
 
 class MyRecipes extends Component {

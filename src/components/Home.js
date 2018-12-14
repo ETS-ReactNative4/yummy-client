@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as Request from "../modules/request";
 import DisplayRecipes from "./DisplayRecipes.js";
 import "./Home.css";
 

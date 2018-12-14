@@ -21,6 +21,7 @@ class CommentInput extends Component {
       .then(response => {
         console.log(response);
       }).catch(err => {
+        console.error(err.message);
         this.setState({errors: [{message: "Please login to comment"}] });
       });
   }

@@ -79,7 +79,7 @@ export function comment(comment) {
   config.headers = getAuthHeader();
 
   return new Promise((resolve, reject) => {
-    axios.post(url + urlExtension, data, config).then(response => {
+    axios.put(url + urlExtension, data, config).then(response => {
       resolve(response);
     }).catch(err => {
       console.log(err.message);
@@ -164,7 +164,7 @@ export function addToFavourites(id) {
   const urlExtension = "favourites/add/";
   config.headers = getAuthHeader();
   return new Promise((resolve, reject) => {
-    axios.post(url + urlExtension,
+    axios.put(url + urlExtension,
       {id: id, userId: getUserId()}, config)
       .then(response => {
         resolve(response);
@@ -177,9 +177,10 @@ export function addToFavourites(id) {
 export function removeFromFavourites(id) {
   const urlExtension = "favourites/remove/";
   config.headers = getAuthHeader();
+  config.data = {id: id, userId: getUserId()};
   return new Promise((resolve, reject) => {
-    axios.post(url + urlExtension,
-      {id: id, userId: getUserId()}, config)
+    axios.delete(url + urlExtension,
+      config)
       .then(response => {
         resolve(response);
       }).catch(err => {

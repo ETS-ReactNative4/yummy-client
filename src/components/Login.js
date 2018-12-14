@@ -23,8 +23,10 @@ class Login extends Component {
 
     Request.login(user).then(response => {
       //Success redirect to home page
+      console.log(response);
       window.location.href = "/";
     }).catch(err => {
+      console.error(err.message);
       this.setState({errors: [{message: "Invalid details"}] });
     });
   }

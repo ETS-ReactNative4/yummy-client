@@ -28,12 +28,14 @@ class Favourite extends Component {
   toggle = () => {
     if (this.state.favourite) {
       Request.removeFromFavourites(this.props.id).then(response => {
+        console.log(response);
         this.setState({favourite: false});
       }).catch(err => {
         console.error(err.message);
       });
     } else {
       Request.addToFavourites(this.props.id).then(response => {
+        console.log(response);
         this.setState({favourite: true});
       }).catch(err => {
         console.error(err.message);
@@ -44,7 +46,11 @@ class Favourite extends Component {
   render() {
     return (
       <div>
-        <i title="Add to favourites" onClick={this.toggle} className={this.state.favourite ? "fa fa-heart" : "fa fa-heart-o"} />
+        <i
+          title="Add to favourites"
+          onClick={this.toggle}
+          className={this.state.favourite ? "fa fa-heart" : "fa fa-heart-o"}
+        />
       </div>
     );
   }

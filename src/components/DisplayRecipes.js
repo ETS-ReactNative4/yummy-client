@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import * as Request from "../modules/request";
 import RecipeCard from "./RecipeCard.js";
-import ErrorMessage from "./ErrorMessage.js";
 import "./DisplayRecipes.css";
 
 class DisplayRecipes extends Component {
@@ -15,7 +14,7 @@ class DisplayRecipes extends Component {
     this.options = ["title", "author", "description", "photo"];
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
     if (this.props.favourite) {
       this.getAllFavourites();
     } else {
@@ -24,10 +23,8 @@ class DisplayRecipes extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.sort, prevState.sort);
     if (this.state.sort != prevState.sort) {
       if (this.props.favourite) {
-        console.log(this.props.favourite);
         this.getAllFavourites(this.state.sort);
       } else {
         this.getAllRecipes(this.state.sort);
@@ -41,7 +38,7 @@ class DisplayRecipes extends Component {
     Request.getAllRecipes(this.options, searchTerm, order).then(response => {
       this.setState({ recipes: response });
     }).catch(err => {
-      this.setState({errors: {message: err.message}});
+      this.setState({errors: [{message: err.message}]});
     });
   }
 
@@ -49,6 +46,7 @@ class DisplayRecipes extends Component {
     Request.getAllFavourites(sort).then(response => {
       this.setState({recipes: response});
     }).catch(err => {
+      console.error(err.message);
       this.setState({errors: [{message: "Could not fetch favourites"}] });
     });
   }

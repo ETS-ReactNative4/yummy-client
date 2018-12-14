@@ -107,8 +107,8 @@ class Recipe extends Component {
             </div>
           )}
           <div className="field is-grouped">
-            <span className="control button no-hover is-white is-rounded has-text-grey is-right">
-              <i className="fa fa-eye"></i>  {this.state.views ? this.state.views : "?"}
+            <span className="control has-text-grey is-right">
+              {this.state.views ? this.state.views + " views" : "?"}
             </span>
           </div>
           <hr />
